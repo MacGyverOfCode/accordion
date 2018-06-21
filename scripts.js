@@ -27,7 +27,7 @@
 	}
 
 	for (i=0; i<accordions.length; i++) {
-		accordions[i].classList.remove('open');
+		accordions[i].classList.remove('accordion--open');
 	}
 
 	for (i=0; i<triggers.length; i++) {
