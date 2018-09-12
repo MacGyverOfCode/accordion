@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Accordion</title>
-	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<link href="accordion.css" rel="stylesheet" type="text/css" />
 </head>
 
 	<div class="accordion accordion--open">
@@ -32,6 +32,10 @@
 		</ul>
 	</div>
 
-	<script src="scripts.js"></script>
+	<script src="accordion.js"></script>
+	<script>
+		const container = document.querySelector('.accordion');
+		new Accordion(container);
+	</script>
 
 </html>
