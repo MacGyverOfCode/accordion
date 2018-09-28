@@ -2,10 +2,11 @@
 
 class Accordion {
 
-	constructor(container) {
+	constructor(container, keepOthersOpen = false) {
 		const items = container.querySelectorAll('.accordion__item');
 		const triggers = container.querySelectorAll('.accordion__trigger');
 		this.setClassesAttributesAndListners(container, items, triggers);
+		this.keepOthersOpen = keepOthersOpen;
 	}
 
 	setClassesAttributesAndListners(container, items, triggers) {
@@ -14,7 +15,7 @@ class Accordion {
 			item.setAttribute('data-height', contentHeight);
 		});
 		[ ...triggers ].forEach((trigger) => {
-			trigger.addEventListener('click', this.triggerClick);
+			trigger.addEventListener('click', this.triggerClick.bind(this));
 		});
 		container.classList.remove('accordion--open');
 	}
@@ -24,9 +25,11 @@ class Accordion {
 		const height = e.target.parentNode.getAttribute('data-height');
 		const items = e.target.parentNode.parentNode.querySelectorAll('.accordion__item');
 		const state = content.clientHeight;
-		items.forEach((item) => {
-			item.querySelector('.accordion__content').style.height = 0;
-		});
+		if (!this.keepOthersOpen) {
+			items.forEach((item) => {
+				item.querySelector('.accordion__content').style.height = 0;
+			});
+		}
 		if (state === 0) {
 			content.style.height = height + 'px';
 		} else {
